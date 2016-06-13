@@ -41,6 +41,15 @@ please notify us your domain for to register on our system
 * your inquiry url : http(s)://yourdomain.com/route=payment/sgopayment/inquirytrx
 * your payment notification url : http(s)://yourdomain.com/index.php?route=payment/sgopayment/reportpayment
 
+Live Demo
+Front End
+http://116.90.162.173:17122/opencart1564/
+Back End
+http://116.90.162.173:17122/opencart1564/admin
+User : admin
+pass : 590admin
+
+
 These method may require you to modified this module, since the bank need a certain messages shown on the landing page.
 Get help
 
