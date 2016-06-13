@@ -5,12 +5,12 @@ $_['text_instruction'] = 'Silahkan Pilih Salah Satu Metode Pembayaran';
 $_['text_description'] = 'Please transfer the total amount to the following bank account.';
 $_['text_payment']     = 'Your order will not ship until we receive payment.';$_['text_transfer_to']     = '';
 
-$_['text_transfer']     	= 'Transfer Menggunakan SGO Payment Gateways';
+$_['text_transfer']     	= 'Transfer Menggunakan Espay Payment Gateways';
 $_['text_transfer_to']  	= 'Transfer Ke';
 $_['text_transfer_from']  	= 'Transfer Dari';
 $_['text_payment_failed']  	= 'Pembayaran Anda Gagal. Silahkan hubungi petugas kami untuk Bantuan atau gunakan metode pembayaran lain.';
 $_['text_transfer_product'] = 'Pembayaran dibuat oleh.';
-$_['text_transfer_waiting'] = 'Menunggu pembayaran menggunakan BII ATM Transfer';
+$_['text_transfer_waiting'] = 'Menunggu pembayaran menggunakan';
 
 
 // Text

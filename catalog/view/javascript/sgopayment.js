@@ -14,18 +14,19 @@
 *  International Registered Trademark & Property of PT Square Gate One
 */
 
-function submitdata(){
-	if (typeof	( $("#sgopayment input[type='radio']:checked").val()) === 'undefined'){
+function submitdata(url){
+	
+	var espayproduct = $("#espayproduct").val();
+		
+	if (espayproduct == ""){
 		alert("Please Select Payment Method");
 		
-	}else{
-		
-		var pos = $("#sgopayment input[type='radio']:checked").val(); 
-		var posLength = pos.length;
-		var n = pos.indexOf(":");
-		var bankCode = pos.substr(0,n);
-		var productCode = pos.substr(n+1,posLength);
-		
+	}else{			
+				
+		var espayproductarr = espayproduct.split(":");
+		var bankCode = espayproductarr[0];
+		var productCode = espayproductarr[1];
+	
 		if ($('#sgopaymentid').val()){
 			var data = {
 						key : $('#sgopaymentid').val(),
@@ -37,16 +38,25 @@ function submitdata(){
 					},
 				sgoPlusIframe = document.getElementById("sgoplus-iframe");
 				
-				if (sgoPlusIframe !== null) {
-					sgoPlusIframe.src = SGOSignature.getIframeURL(data);
-					console.log(sgoPlusIframe.src);
-				}
-				SGOSignature.receiveForm();
-			}else{
-				alert("sgopayment id is not defined");
-			}
-		}
-		
+				//console.log(url+"&product="+productCode);
+				
+				 jQuery.ajax({
+					   type : "GET",
+					   url : url+"&product="+productCode,
+					   success : (function() {
+						//console.log('success');
+						if (sgoPlusIframe !== null)
+						 sgoPlusIframe.src = SGOSignature.getIframeURL(data);
+						 SGOSignature.receiveForm() 
+
+					   })
+				});				
+				
+		}else{
+				alert("espayproduct id is not defined");
+			} 
+	}
+		 
 	 
 }
 

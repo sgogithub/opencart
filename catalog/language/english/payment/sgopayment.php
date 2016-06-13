@@ -10,7 +10,7 @@ $_['text_transfer_to']  	= 'Transfer to';
 $_['text_transfer_from']  	= 'Transfer from';
 $_['text_payment_failed']  	= 'Your payment has failed. Please contact the shop administrator for assistance or use a different payment option.';
 $_['text_transfer_product'] = 'Payments mades by.';
-$_['text_transfer_waiting'] = 'Waiting for transfer using BII ATM Transfer';
+$_['text_transfer_waiting'] = 'Waiting for transfer using';
 
 
 // Text
