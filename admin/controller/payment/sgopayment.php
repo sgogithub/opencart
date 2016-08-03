@@ -157,6 +157,7 @@ class ControllerPaymentSgopayment extends  Controller {
 		
 		$this->data['entry_sgopayment_id'] = $this->language->get('entry_sgopayment_id');
 		$this->data['entry_sgopayment_password'] = $this->language->get('entry_sgopayment_password');
+		$this->data['entry_sgopayment_signaturekey'] = $this->language->get('entry_sgopayment_signaturekey');
 		$this->data['entry_sgopayment_ip'] = $this->language->get('entry_sgopayment_ip');
 		
 		
@@ -264,6 +265,12 @@ class ControllerPaymentSgopayment extends  Controller {
 			$this->data['sgopayment_password'] = $this->request->post['sgopayment_password'];
 		} else {
 			$this->data['sgopayment_password'] = $this->config->get('sgopayment_password');
+		}
+		
+		if (isset($this->request->post['sgopayment_signaturekey'])) {
+			$this->data['sgopayment_signaturekey'] = $this->request->post['sgopayment_signaturekey'];
+		} else {
+			$this->data['sgopayment_signaturekey'] = $this->config->get('sgopayment_signaturekey');
 		}
 		
 		if (isset($this->request->post['sgopayment_ip'])) {
@@ -377,6 +384,10 @@ class ControllerPaymentSgopayment extends  Controller {
 		
 		if (empty($this->request->post['sgopayment_password'])) {
 			$this->error['sgopayment_password'] = $this->language->get('error_password');
+		}
+		
+		if (empty($this->request->post['sgopayment_signaturekey'])) {
+			$this->error['sgopayment_signaturekey'] = $this->language->get('error_signaturekey');
 		}
 		
 		if (empty($this->request->post['sgopayment_total'])) {

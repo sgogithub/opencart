@@ -222,26 +222,40 @@ class ControllerPaymentsgopayment extends Controller {
 			header ( 'HTTP/1.1 200 OK' );
 			$order_id = $this->request->post ["order_id"]; // get the order_id
 			$password = $this->request->post ["password"]; // get the password from sgo
+			
+			$signaturePostman = $this->request->post ["signature"]; // get the signature from sgo
+			$rq_datetime = $this->request->post ["rq_datetime"]; // get the rq_datetime from sgo
+			
+			$signatureKey = $this->config->get ( "sgopayment_signaturekey" ); // get the signature from admin
 			                                              
+			$key = '##'.$signatureKey.'##'.$rq_datetime.'##'.$order_id.'##'.'INQUIRY'.'##';
+			//$key = '##7BC074F97C3131D2E290A4707A54A623##2016-07-25 11:05:49##145000065##INQUIRY##';
+			$uppercase = strtoupper($key);
+			$signatureKeyRest = hash('sha256', $uppercase);											  
+														  
 			// validate the password
 			if ($password == $this->config->get ( "sgopayment_password" )) {
-				
-				// validate order id
-				if (! $this->model_checkout_order->getOrder ( $order_id )) {
-					echo '1;Order Id Does Not Exist;;;;;'; // if order id not exist show plain reponse
-				} else {
-					// if order id truly exist get order detail from database
-					$order_detail = $this->model_checkout_order->getOrder ( $order_id );
-					//var_dump($order_detail ["total"]);					
-									
-					$fee = $this->model_payment_sgopayment->getfee ( $order_id );
+				if($signatureKeyRest == $signaturePostman){
+					// validate order id
+					if (! $this->model_checkout_order->getOrder ( $order_id )) {
+						echo '1;Order Id Does Not Exist;;;;;'; // if order id not exist show plain reponse
+					} else {
+						// if order id truly exist get order detail from database
+						$order_detail = $this->model_checkout_order->getOrder ( $order_id );
+						//var_dump($order_detail ["total"]);					
 										
-					$amount = floatval($order_detail ["total"]) - floatval($fee);
-					
-					// show response
-					// see TSD for more detail
-					echo '0;Success;' . $order_id . ';' . str_replace ( '.0000', '', $amount ) . '.00;' . $order_detail ["currency_code"] . '; Pembayaran Order ' . $order_id . ' oleh ' . $order_detail ["lastname"] . ' ' . $order_detail ["firstname"] . ';' . date ( 'Y/m/d H:i:s' ) . '';
-				}
+						$fee = $this->model_payment_sgopayment->getfee ( $order_id );
+											
+						$amount = floatval($order_detail ["total"]) - floatval($fee);
+						
+						// show response
+						// see TSD for more detail
+						echo '0;Success;' . $order_id . ';' . str_replace ( '.0000', '', $amount ) . '.00;' . $order_detail ["currency_code"] . '; Pembayaran Order ' . $order_id . ' oleh ' . $order_detail ["lastname"] . ' ' . $order_detail ["firstname"] . ';' . date ( 'Y/m/d H:i:s' ) . '';
+					}
+				}else{					
+					// if Signature Key not true
+					echo '1;Invalid Signature Key;;;;;';
+				}				
 			} else {
 				// if password not true
 				echo '1;Merchant Failed to Identified;;;;;';
@@ -266,27 +280,43 @@ class ControllerPaymentsgopayment extends Controller {
 			$debit_from = $this->request->post ["debit_from"];
 			$credit_to = $this->request->post ["credit_to"];
 			$product = $this->request->post ["product_code"];
+			$signaturePostman = $this->request->post ["signature"];
+			$rq_datetime = $this->request->post ["rq_datetime"];
+			
+			//get data from admin
+			$signatureKey = $this->config->get ( "sgopayment_signaturekey" ); // get the signature from admin
+			                                              
+			$key = '##'.$signatureKey.'##'.$rq_datetime.'##'.$order_id.'##'.'PAYMENTREPORT'.'##';
+			//$key = '##7BC074F97C3131D2E290A4707A54A623##2016-07-25 11:05:49##145000065##INQUIRY##';
+			$uppercase = strtoupper($key);
+			$signatureKeyRest = hash('sha256', $uppercase);
 			
 			// validate password
 			if ($password == $this->config->get ( "sgopayment_password" )) {
-				if (! $this->model_checkout_order->getOrder ( $order_id )) { // check order id exist
-				                                                        // if order id not exist
-					echo '1,Order Id Does Not Exist,,,';
-				} else {
-					// get order detail
-					$order_detail = $this->model_checkout_order->getOrder ( $order_id );
-					
-					$comment = "";
-					$comment .= $this->language->get ( 'text_transfer' ) . "\n\n";
-					$comment .= $this->language->get ( 'text_transfer_from' ) . " " . $credit_to . "\n\n";
-					$comment .= $this->language->get ( 'text_transfer_to' ) . " " . $debit_from . "\n\n";
-					$comment .= $this->language->get ( 'text_transfer_product' ) . " " . $product . "\n\n";
-					
-					$reconsile_id = $member_id . " - " . $order_id . date ( 'YmdHis' );
-					echo '0,Success,' . $reconsile_id . ',' . $order_id . ',' . date ( 'Y-m-d H:i:s' ) . '';
-					// save the order id that already pay
-					$this->model_checkout_order->update ( $order_id, $this->config->get ( 'sgopayment_order_status_id' ), $comment, true );
+				if($signatureKeyRest == $signaturePostman){
+					if (! $this->model_checkout_order->getOrder ( $order_id )) { // check order id exist
+				        // if order id not exist                                               
+						echo '1,Order Id Does Not Exist,,,';
+					} else {
+						// get order detail
+						$order_detail = $this->model_checkout_order->getOrder ( $order_id );
+						
+						$comment = "";
+						$comment .= $this->language->get ( 'text_transfer' ) . "\n\n";
+						$comment .= $this->language->get ( 'text_transfer_from' ) . " " . $credit_to . "\n\n";
+						$comment .= $this->language->get ( 'text_transfer_to' ) . " " . $debit_from . "\n\n";
+						$comment .= $this->language->get ( 'text_transfer_product' ) . " " . $product . "\n\n";
+						
+						$reconsile_id = $member_id . " - " . $order_id . date ( 'YmdHis' );
+						echo '0,Success,' . $reconsile_id . ',' . $order_id . ',' . date ( 'Y-m-d H:i:s' ) . '';
+						// save the order id that already pay
+						$this->model_checkout_order->update ( $order_id, $this->config->get ( 'sgopayment_order_status_id' ), $comment, true );
+					}
+				}else{
+					// if Signature Key not true
+					echo '1;Invalid Signature Key;;;;;';
 				}
+				
 			} else {
 				//
 				echo '1,Password does not match,,,';

@@ -43,7 +43,18 @@
               <?php endif; ?>
 			</td>
           </tr>
+		  
+		  <tr>
+            <td><span class="required">*</span> <?php echo $entry_sgopayment_signaturekey; ?></td>
+            <td>
+				<input type="password" size="50" name="sgopayment_signaturekey" value="<?php echo $sgopayment_signaturekey; ?>" />
+				<?php if (isset($error['sgopayment_signaturekey'])): ?>
+                <span class="error"><?php echo $error['sgopayment_signaturekey']; ?></span>
+              <?php endif; ?>
+			</td>
+          </tr>
           
+		  <tr>
             <td><?php echo $entry_sgopayment_ip; ?></td>
             <td><input type="text" size="50" name="sgopayment_ip" value="<?php echo $sgopayment_ip; ?>" /></td>
           </tr>
