@@ -423,7 +423,7 @@ class ControllerPaymentSgopayment extends  Controller {
 		
 		$this->load->model('payment/sgopayment');
 		
-		$urlMerchant = 'http://116.90.162.170:10809/rest/merchant/merchantinfo';
+		$urlMerchant = 'https://sandbox-api.espay.id/rest/merchant/merchantinfo';
 		$requestMerchant->key = $this->config->get('sgopayment_id');
 		//var_dump($requestMerchant);
 		$responseMerchant = $this->Call($urlMerchant, $requestMerchant);
