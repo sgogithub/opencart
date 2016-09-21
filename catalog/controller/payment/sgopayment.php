@@ -369,7 +369,7 @@ class ControllerPaymentsgopayment extends Controller {
 		
 		$MODULE_PAYMENT_ESPAY_MODE = $this->config->get ( 'sgopayment_environment' );
 		
-		$urlMerchant =  $MODULE_PAYMENT_ESPAY_MODE == '1'? 'https://116.90.162.172:812/rest/merchant/merchantinfo' : 'http://116.90.162.170:10809/rest/merchant/merchantinfo';
+		$urlMerchant =  $MODULE_PAYMENT_ESPAY_MODE == '1'? 'https://api.espay.id/rest/merchant/merchantinfo' : 'https://sandbox-api.espay.id/rest/merchant/merchantinfo';
 		
 		//$urlMerchant = 'http://116.90.162.170:10809/rest/merchant/merchantinfo';		
 		$requestMerchant->key = $this->config->get('sgopayment_id');
