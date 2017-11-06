@@ -400,7 +400,7 @@ class ControllerPaymentsgopayment extends Controller {
 				$html .= '<input type="radio" name="espayproduct" id="espayproduct" value="'.$product['bankCode'].':'.$product['productCode'].':'.$product['productName'].' ">';
 				$html .= '</td>';
 				$html .="<td width=80px>";
-				$html .= '<img src="https://secure.sgo.co.id/images/products/'.$product['productCode'].'.png" width="100px">';
+				$html .= '<img src="https://kit.espay.id/images/products/'.$product['productCode'].'.png" width="100px">';
 				$html .= '</td>';
 				$html .="<td width=200px>";
 				$html .= ''.$product['productName'].'';
