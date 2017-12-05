@@ -65,7 +65,7 @@
     </tfoot>
   </table>
 </div>
-<!-- <script type="text/javascript" src="http://secure-dev.sgo.co.id/public/signature/js"></script> -->
+<!-- <script type="text/javascript" src="https://sandbox-kit.espay.id/public/signature/js"></script> -->
 
 <?php if ($MODULE_PAYMENT_ESPAY_MODE == 1){ ?>
 	<script type="text/javascript" src="https://kit.espay.id/public/signature/js"></script>
