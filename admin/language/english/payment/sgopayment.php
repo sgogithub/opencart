@@ -29,6 +29,7 @@ $_['entry_transaction_fee_mandiri_ib']   = 'Transaction Fee Mandiri Internet Ban
 $_['entry_transaction_fee_mandiri_ecash']   = 'Transaction Fee Mandiri Ecash:';
 $_['entry_transaction_fee_credit_card']   = 'Transaction Fee Credit Card:';
 $_['entry_transaction_fee_permata_atm']   = 'Transaction Fee Permata ATM:';
+$_['entry_transaction_fee_danamon_atm']   = 'Transaction Fee Danamon ATM:';
 $_['entry_transaction_fee_danamon_ob']   = 'Transaction Fee Danamon OB:';
 $_['entry_transaction_fee_bii_atm']   = 'Transaction Fee BII ATM:';
 $_['entry_transaction_fee_permata_netpay']   = 'Transaction Fee Permata Net Pay:';

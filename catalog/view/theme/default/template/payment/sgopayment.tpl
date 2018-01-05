@@ -36,6 +36,9 @@ function validateespayproduct() {
 	<input type="hidden" value="<?php echo $sgopayment_transaction_fee_credit_card?>" name="sgopayment_transaction_fee_credit_card" id="sgopayment_transaction_fee_credit_card">
 	<input type="hidden" value="<?php echo $sgopayment_transaction_fee_permata_atm?>" name="sgopayment_transaction_fee_permata_atm" id="sgopayment_transaction_fee_permata_atm">
 	<input type="hidden" value="<?php echo $sgopayment_transaction_fee_danamon_ob?>" name="sgopayment_transaction_fee_danamon_ob" id="sgopayment_transaction_fee_danamon_ob">
+
+	<input type="hidden" value="<?php echo $sgopayment_transaction_fee_danamon_atm?>" name="sgopayment_transaction_fee_danamon_atm" id="sgopayment_transaction_fee_danamon_atm">
+	
 	<input type="hidden" value="<?php echo $sgopayment_transaction_fee_bii_atm?>" name="sgopayment_transaction_fee_bii_atm" id="sgopayment_transaction_fee_bii_atm">
 	<input type="hidden" value="<?php echo $sgopayment_transaction_fee_permata_netpay?>" name="sgopayment_transaction_fee_permata_netpay" id="sgopayment_transaction_fee_permata_netpay">
 	<input type="hidden" value="<?php echo $sgopaytment_transaction_fee_nobupay?>" name="sgopayment_transaction_fee_nobupay" id="sgopayment_transaction_fee_nobupay">

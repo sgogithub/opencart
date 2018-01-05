@@ -70,10 +70,10 @@ class ModelPaymentSgopayment extends Model {
 		$currSymobl = $this->currency->getSymbolLeft($this->session->data['currency']);
 		
 		//insert fee to tbl order_total				
-		$sqlstatustransactionfee = $this->db->query("SELECT count(*) as `status_transaction_fee` FROM `oc_order_total` where order_id =".$order_id." and code = 'transaction_fee'");
+		$sqlstatustransactionfee = $this->db->query("SELECT count(*) as `status_transaction_fee` FROM `".DB_PREFIX."order_total` where order_id =".$order_id." and code = 'transaction_fee'");
 		
 		if ($sqlstatustransactionfee->row['status_transaction_fee'] == 0){ // if transaction_fee not insert yet
-			$text = $currSymobl.".".number_format($fee,2);
+			$text = $currSymobl.number_format($fee,2);
 			$sqlInsertFee = "INSERT INTO `".DB_PREFIX."order_total` (`order_id`,`code`,`title`,`text`,`value`,`sort_order`) VALUES ('".$order_id."', 'transaction_fee', 'Transaction Fee', '".$text."',  '".$fee."', '8')";
 			$this->db->query($sqlInsertFee);
 			
@@ -83,7 +83,7 @@ class ModelPaymentSgopayment extends Model {
 			$totalorder_ = str_replace( '.0000', '', $totalorder2);
 			
 			$value = $totalorder_ + $fee;
-			$textTotal = $currSymobl.".".number_format($value,2);
+			$textTotal = $currSymobl.number_format($value,2);
 			$sqlUpdateTotal = "UPDATE `".DB_PREFIX."order_total`
 									SET text='".$textTotal."', value='".$value."'
 									WHERE order_id=".$order_id." and code='total' ";
